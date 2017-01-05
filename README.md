@@ -10,7 +10,7 @@ This library provide a writer to RIS data format.
 
 1. Follow the instructions at http://packagist.org
 2. In your new project, create a `composer.json` file which requires
-   RefLibRIS:
+   RefLibRis:
 
 ```javascript
 {
@@ -43,4 +43,4 @@ $output = $writer->addRecord($record)->process();
 ## Found a bug
 
 If you found a bug, *please* let me know. The best way is to file a report at 
-[http://github.com/funstaff/RefLibRIS/issues](http://github.com/funstaff/RefLibRIS/issues).
+[http://github.com/funstaff/RefLibRis/issues](http://github.com/funstaff/RefLibRis/issues).
