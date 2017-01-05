@@ -28,18 +28,39 @@ This library provide a writer to RIS data format.
 
 namespace ...;
 
-use Funstaff\RefLibRis\RisWriter;
+use Funstaff\RefLibRis\RecordProcessing;
 use Funstaff\RefLibRis\RisDefinition;
+use Funstaff\RefLibRis\RisFieldsMapping;
+use Funstaff\RefLibRis\RisWriter;
 
-$writer = new RisWriter(new RisDefinition());
-
-$record = [
-    'TY' => 'BOOK',
-    'AU' => ['Behrens, J.'],
-    'TI' => ['History of the CDC PY - 1999']
+$mapping = [
+    'TY' => ['type'],
+    'AU' => ['author'],
+    'TI' => ['title', 'title_secondary'],
 ];
 
+$risFieldsMapping = new RisFieldsMapping($mapping);
+
+$recordDb = [
+    'title' => ['History of the CDC PY - 1999'],
+    'author' => ['Behrens, J.', 'Behrens, A.'],
+    'type' => ['BOOK']
+];
+
+$recordProcessing = new RecordProcessing($risFieldsMapping);
+$record = $recordProcessing->process($recordDb);
+
+$writer = new RisWriter(new RisDefinition());
 $output = $writer->addRecord($record)->process();
+```
+Output:
+```ex
+TY  - BOOK
+AU  - Behrens, J.
+AU  - Behrens, A.
+TI  - History of the CDC PY - 1999
+ER  -
+
 ```
 
 ## Found a bug
