@@ -27,7 +27,7 @@ class RisFieldsMapping implements RisFieldsMappingInterface
      * @param string $field
      * @return null|string
      */
-    public function findTagByField(string $field)
+    public function findRisFieldByFieldName(string $field)
     {
         return $this->arrayFind($field);
     }
