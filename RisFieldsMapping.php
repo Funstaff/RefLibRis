@@ -33,6 +33,14 @@ class RisFieldsMapping implements RisFieldsMappingInterface
     }
 
     /**
+     * @return array
+     */
+    public function getAllRisFields()
+    {
+        return array_keys($this->mapping);
+    }
+
+    /**
      * @param string $value
      * @return null|string
      */

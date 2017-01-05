@@ -12,15 +12,38 @@ use Funstaff\RefLibRis\RisFieldsMapping;
 class RisFieldsMappingTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var RisFieldsMapping
+     */
+    private $fieldMapping;
+
+    /**
+     * setUp
+     */
+    public function setUp()
+    {
+        $this->fieldMapping = new RisFieldsMapping($this->getMapping());
+    }
+
+    /**
      * testFindField
      */
     public function testFindField()
     {
-        $fieldMapping = new RisFieldsMapping($this->getMapping());
-        $this->assertEquals('CN', $fieldMapping->findRisFieldByFieldName('isbn'));
-        $this->assertNull($fieldMapping->findRisFieldByFieldName('ZZ'));
+        $this->assertEquals('CN', $this->fieldMapping->findRisFieldByFieldName('isbn'));
+        $this->assertNull($this->fieldMapping->findRisFieldByFieldName('ZZ'));
     }
 
+    /**
+     * testGetAllRisFields
+     */
+    public function testGetAllRisFields()
+    {
+        $this->assertEquals(array_keys($this->getMapping()), $this->fieldMapping->getAllRisFields());
+    }
+
+    /**
+     * @return array
+     */
     private function getMapping()
     {
         return [
