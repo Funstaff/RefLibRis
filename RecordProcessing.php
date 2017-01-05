@@ -36,7 +36,7 @@ class RecordProcessing
                 $values = [$values];
             }
             $risField = $this->fieldsMapping->findRisFieldByFieldName($field);
-            if ($risField) {
+            if (null !== $risField) {
                 foreach ($values as $value) {
                     array_push($risFields[$risField], $value);
                 }
