@@ -17,8 +17,8 @@ class RisFieldsMappingTest extends \PHPUnit_Framework_TestCase
     public function testFindField()
     {
         $fieldMapping = new RisFieldsMapping($this->getMapping());
-        $this->assertEquals('CN', $fieldMapping->findTagByField('isbn'));
-        $this->assertNull($fieldMapping->findTagByField('ZZ'));
+        $this->assertEquals('CN', $fieldMapping->findRisFieldByFieldName('isbn'));
+        $this->assertNull($fieldMapping->findRisFieldByFieldName('ZZ'));
     }
 
     private function getMapping()
