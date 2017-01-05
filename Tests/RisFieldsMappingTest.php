@@ -7,7 +7,7 @@ use Funstaff\RefLibRis\RisFieldsMapping;
 /**
  * RisFieldsMappingTest
  *
- * @author Bertrand Zuchuat <bertrand.zuchuat@rero.ch>
+ * @author Bertrand Zuchuat <bertrand.zuchuat@gmail.com>
  */
 class RisFieldsMappingTest extends \PHPUnit_Framework_TestCase
 {

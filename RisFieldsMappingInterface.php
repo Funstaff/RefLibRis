@@ -5,7 +5,7 @@ namespace Funstaff\RefLibRis;
 /**
  * RisFieldsMappingInterface
  *
- * @author Bertrand Zuchuat <bertrand.zuchuat@rero.ch>
+ * @author Bertrand Zuchuat <bertrand.zuchuat@gmail.com>
  */
 interface RisFieldsMappingInterface
 {
