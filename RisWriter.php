@@ -83,6 +83,10 @@ class RisWriter
             throw new \InvalidArgumentException('TY Tag field not found.');
         }
 
+        if (is_string($record['TY'])) {
+            $record['TY'] = [$record['TY']];
+        }
+
         /* First position for TY (Type) */
         array_push($buffer, sprintf('TY  - %s', $record['TY'][0]));
         unset($record['TY']);
