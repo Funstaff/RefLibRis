@@ -14,4 +14,9 @@ interface RisFieldsMappingInterface
      * @return null|string
      */
     public function findRisFieldByFieldName(string $field);
+
+    /**
+     * @return array
+     */
+    public function getAllRisFields();
 }
