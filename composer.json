@@ -1,0 +1,27 @@
+{
+    "name": "funstaff/ref-lib-ris",
+    "description": "RIS is a format for reference metadata",
+    "keywords": ["RIS", "Reference", "Bibliography"],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/funstaff/RefLibRis",
+    "authors": [
+        {
+            "name": "Bertrand Zuchuat",
+            "email": "bertrand.zuchuat@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "psr-4": { "Funstaff\\RefLibRis\\": "" },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "minimum-stability": "stable"
+}
