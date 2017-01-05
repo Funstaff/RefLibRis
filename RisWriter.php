@@ -84,7 +84,7 @@ class RisWriter
         }
 
         /* First position for TY (Type) */
-        array_push($buffer, sprintf('TY  - %s', $record['TY']));
+        array_push($buffer, sprintf('TY  - %s', $record['TY'][0]));
         unset($record['TY']);
 
         /* Order the array */
