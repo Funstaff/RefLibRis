@@ -1,6 +1,8 @@
 RefLibRis
 ===
 
+[![Build Status](https://travis-ci.org/Funstaff/RefLibRis.svg?branch=master)](https://travis-ci.org/Funstaff/RefLibRis)
+
 * Author: Bertrand Zuchuat <bertrand.zuchuat@gmail.com>
 * License: MIT
 
