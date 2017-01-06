@@ -49,7 +49,7 @@ class RecordProcessing
     private function getRisFieldsArray()
     {
         $risFields = array_flip($this->fieldsMapping->getAllRisFields());
-        array_walk($risFields, function (&$line) {
+        array_walk($risFields, function(&$line) {
             $line = [];
         });
 
