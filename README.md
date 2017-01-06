@@ -3,6 +3,9 @@ RefLibRis
 
 [![Build Status](https://travis-ci.org/Funstaff/RefLibRis.svg?branch=master)](https://travis-ci.org/Funstaff/RefLibRis)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Funstaff/RefLibRis/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Funstaff/RefLibRis/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/funstaff/ref-lib-ris/v/stable)](https://packagist.org/packages/funstaff/ref-lib-ris)
+[![License](https://poser.pugx.org/funstaff/ref-lib-ris/license)](https://packagist.org/packages/funstaff/ref-lib-ris)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0ae60c3a-8405-4e4f-baae-f5d697e367a9/mini.png)](https://insight.sensiolabs.com/projects/0ae60c3a-8405-4e4f-baae-f5d697e367a9)
 
 * Author: Bertrand Zuchuat <bertrand.zuchuat@gmail.com>
 * License: MIT
