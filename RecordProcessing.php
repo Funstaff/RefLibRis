@@ -10,35 +10,46 @@ namespace Funstaff\RefLibRis;
 class RecordProcessing
 {
     /**
-     * @var RisFieldsMappingInterface
+     * @var RisMappingsInterface
      */
-    private $fieldsMapping;
+    private $mappings;
 
     /**
      * RecordProcessing constructor.
-     * @param RisFieldsMappingInterface $fieldsMapping
+     * @param RisMappingsInterface $mappings
      */
-    public function __construct(RisFieldsMappingInterface $fieldsMapping)
+    public function __construct(RisMappingsInterface $mappings)
     {
-        $this->fieldsMapping = $fieldsMapping;
+        $this->mappings = $mappings;
     }
 
     /**
-     * @param array $recordFields
-     * @return array
+     * @param array  $recordFields
+     * @param string $columnTypeName
+     * @return mixed
+     * @throws \Exception
      */
-    public function process(array $recordFields)
+    public function process(array $recordFields, string $columnTypeName = 'type')
     {
-        $risFields = $this->getRisFieldsArray();
+        if (!array_key_exists($columnTypeName, $recordFields)) {
+            throw new \InvalidArgumentException(sprintf(
+                'The name "%s" of Column Type does not exists on fields record',
+                $columnTypeName
+            ));
+        }
 
+        $type = $recordFields[$columnTypeName][0];
+
+        $mapping = $this->mappings->findRisFieldByType($type);
+        $risFields = $this->getRisFieldsArray($mapping);
         foreach ($recordFields as $field => $values) {
             if (is_string($values)) {
                 $values = [$values];
             }
-            $risField = $this->fieldsMapping->findRisFieldByFieldName($field);
+            $risField = $mapping->findRisFieldByFieldName($field);
             if (null !== $risField) {
                 foreach ($values as $value) {
-                    array_push($risFields[$risField], $value);
+                    $risFields[$risField][] = $value;
                 }
             }
         }
@@ -46,9 +57,13 @@ class RecordProcessing
         return $risFields;
     }
 
-    private function getRisFieldsArray()
+    /**
+     * @param RisFieldsMappingInterface $mapping
+     * @return array|null
+     */
+    private function getRisFieldsArray(RisFieldsMappingInterface $mapping)
     {
-        $risFields = array_flip($this->fieldsMapping->getAllRisFields());
+        $risFields = array_flip($mapping->getAllRisFields());
         array_walk($risFields, function(&$line) {
             $line = [];
         });

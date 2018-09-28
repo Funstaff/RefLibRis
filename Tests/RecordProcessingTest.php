@@ -3,7 +3,7 @@
 namespace Funstaff\RefLibRis\Tests;
 
 use Funstaff\RefLibRis\RecordProcessing;
-use Funstaff\RefLibRis\RisFieldsMapping;
+use Funstaff\RefLibRis\RisMappings;
 
 /**
  * RecordProcessingTest
@@ -17,9 +17,32 @@ class RecordProcessingTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcess()
     {
-        $recordProcessing = new RecordProcessing(new RisFieldsMapping($this->getMapping()));
+        $risMappings = new RisMappings($this->getMapping(), 'default');
+        $recordProcessing = new RecordProcessing($risMappings);
         $result = $recordProcessing->process($this->getRecord());
         $this->assertEquals($this->getResultRecord(), $result);
+    }
+
+    /**
+     * testOtherTypeProcess
+     */
+    public function testOtherTypeProcess()
+    {
+        $risMappings = new RisMappings($this->getMapping(), 'default');
+        $recordProcessing = new RecordProcessing($risMappings);
+        $result = $recordProcessing->process($this->getRecordWithOtherFieldType(), 'idType');
+        $this->assertEquals($this->getResultRecord(), $result);
+    }
+
+    /**
+     * testException
+     */
+    public function testException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $risMappings = new RisMappings($this->getMapping(), 'default');
+        $recordProcessing = new RecordProcessing($risMappings);
+        $recordProcessing->process($this->getRecord(), 'foo');
     }
 
     /**
@@ -28,10 +51,12 @@ class RecordProcessingTest extends \PHPUnit_Framework_TestCase
     private function getMapping()
     {
         return [
-            'TY' => ['type'],
-            'SN' => ['isbn', 'issn'],
-            'AU' => ['author'],
-            'TI' => ['title'],
+            'BOOK' => [
+                'TY' => ['type', 'idType'],
+                'SN' => ['isbn', 'issn'],
+                'AU' => ['author'],
+                'TI' => ['title'],
+            ]
         ];
     }
 
@@ -42,6 +67,16 @@ class RecordProcessingTest extends \PHPUnit_Framework_TestCase
     {
         return [
             'type' => ['BOOK'],
+            'isbn' => ['2253167150'],
+            'author' => ['Lisa Gardner'],
+            'title' => ['La maison d\'à côté'],
+        ];
+    }
+
+    private function getRecordWithOtherFieldType()
+    {
+        return [
+            'idType' => ['BOOK'],
             'isbn' => ['2253167150'],
             'author' => ['Lisa Gardner'],
             'title' => ['La maison d\'à côté'],

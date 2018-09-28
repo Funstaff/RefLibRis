@@ -22,7 +22,7 @@ This library provide a writer to RIS data format.
 ```javascript
 {
   "require": {
-    "funstaff/ref-lib-ris": ">=1.0"
+    "funstaff/ref-lib-ris": ">=2.0"
   }
 }
 ```
@@ -35,16 +35,22 @@ namespace ...;
 
 use Funstaff\RefLibRis\RecordProcessing;
 use Funstaff\RefLibRis\RisDefinition;
-use Funstaff\RefLibRis\RisFieldsMapping;
+use Funstaff\RefLibRis\RisMappings;
 use Funstaff\RefLibRis\RisWriter;
 
 $mapping = [
-    'TY' => ['type'],
-    'AU' => ['author'],
-    'TI' => ['title', 'title_secondary'],
+    'DEFAULT' => [
+        'TY' => ['type'],
+        'AU' => ['author'],
+        'TI' => ['title', 'title_secondary'],
+    ],
+    'BOOK' => [
+        'TY' => ['type'],
+        'AU' => ['author'],
+        'TI' => ['title', 'title_secondary'],
+        'ID' => ['recordid']
+    ]
 ];
-
-$risFieldsMapping = new RisFieldsMapping($mapping);
 
 $recordDb = [
     'title' => ['History of the CDC PY - 1999'],
@@ -52,7 +58,8 @@ $recordDb = [
     'type' => ['BOOK']
 ];
 
-$recordProcessing = new RecordProcessing($risFieldsMapping);
+$risMappings = new RisMappings($mapping, 'DEFAULT');
+$recordProcessing = new RecordProcessing($risMappings);
 $record = $recordProcessing->process($recordDb);
 
 $writer = new RisWriter(new RisDefinition());
