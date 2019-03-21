@@ -42,14 +42,17 @@ class RecordProcessing
 
         $mapping = $this->mappings->findRisFieldByType($type);
         $risFields = $this->getRisFieldsArray($mapping);
+
         foreach ($recordFields as $field => $values) {
             if (is_string($values)) {
                 $values = [$values];
             }
-            $risField = $mapping->findRisFieldByFieldName($field);
-            if (null !== $risField) {
-                foreach ($values as $value) {
-                    $risFields[$risField][] = $value;
+            $risFieldsName = $mapping->findRisFieldByFieldName($field);
+            if (count($risFieldsName) > 0) {
+                foreach ($risFieldsName as $risField) {
+                    foreach ($values as $value) {
+                        $risFields[$risField][] = $value;
+                    }
                 }
             }
         }

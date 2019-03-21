@@ -46,11 +46,10 @@ class RisFieldsMapping implements RisFieldsMappingInterface
      */
     private function arrayFind(string $value)
     {
-        $tag = null;
+        $tag = [];
         foreach ($this->mapping as $key => $fields) {
             if (in_array($value, $fields)) {
-                $tag = (string) $key;
-                break;
+                $tag[] = (string) $key;
             }
         }
 
